@@ -17,6 +17,12 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('title');
+            $table->text('content');
+            $table->dateTime('dueDate');
+            $table->dateTime('completetionDate');
+            $table->integer('sheet');
+            $table->enum('priority', ['urgent','high', 'medium', 'low']);
            
         });
     }

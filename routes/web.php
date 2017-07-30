@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::any('/tasks/{page?}', 'TaskController@index');
+Route::any('/task/create', 'TaskController@create');
+Route::any('/task/show', 'TaskController@show');
+Route::any('/task/trash', 'TaskController@trash');
+Route::any('/task/delete', 'TaskController@destroy');

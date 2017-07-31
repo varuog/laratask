@@ -23,7 +23,7 @@ class TaskTableSeeder extends Seeder {
                 'completetionDate' => $faker->dateTime,
                 'title' => $faker->sentence,
                 'content' => $faker->text,
-                'sheet' => 1,
+                'sheet' => rand(1, 3),
             ]);
         }
     }

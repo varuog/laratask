@@ -9,6 +9,7 @@
 namespace App\Service;
 
 use App\Task;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Description of TaskService
@@ -17,8 +18,29 @@ use App\Task;
  */
 class TaskService {
 
-    public function show(Task $task, $page = 1) {
-        
+    const ITEM_PER_PAGE = 15;
+
+    public function show($priority) {
+
+        $tasks = Task::where('sheet', '=', 1);
+        if ($priority != 'any') {
+            $tasks = $tasks->where('priority', '=', $priority);
+        }
+        $tasks = $tasks->paginate(static::ITEM_PER_PAGE);
+        return $tasks;
+    }
+
+    public function getPriorityCount() {
+        $totalCountByPriority = DB::table('tasks')
+                ->select('priority', DB::raw('count(*) as totalTask'))
+                ->groupBy('priority')
+                ->get()
+                ->toArray();
+
+
+       $totalCountByPriority=array_column($totalCountByPriority, 'totalTask', 'priority');
+       $totalCountByPriority['all']= array_sum($totalCountByPriority);
+       return $totalCountByPriority;
     }
 
 }

@@ -19,9 +19,11 @@ class TaskController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        
-        return view('layout.laratask');
+    public function index($priority='any') {
+        /* @var $tasks \Illuminate\Database\Eloquent\Builder */
+        $tasks=$this->taskService->show($priority);
+        $totalCountByPriority= $this->taskService->getPriorityCount();
+        return view('tasks', ['tasks' => $tasks, 'totalByPriority' => $totalCountByPriority]);
     }
 
     /**
@@ -49,7 +51,7 @@ class TaskController extends Controller {
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task, $page=1) {
+    public function show(Task $task) {
         //
     }
 

@@ -3,7 +3,7 @@
     "description": "Sample task manager application.",
     "keywords": ["task-manager", "laravel"],
     "homepage": "https://github.com/Gourav-Sarkar/zfe-user",
-    "license": "BSD-3-Claus",
+    "license": "GPL-3",
     "type": "project",
     "require": {
         "php": ">=5.6.4",

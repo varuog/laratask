@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('/tasks/{priority}/', 'TaskController@index');
+Route::any('/tasks/{sheet}/{priority}/', 'TaskController@index');
 Route::any('/task/create', 'TaskController@create');
 Route::any('/task/show/{task}', 'TaskController@show');
 Route::any('/task/trash', 'TaskController@trash');

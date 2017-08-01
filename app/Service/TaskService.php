@@ -20,9 +20,9 @@ class TaskService {
 
     const ITEM_PER_PAGE = 15;
 
-    public function show($priority) {
+    public function show($priority, $sheet) {
 
-        $tasks = Task::where('sheet', '=', 1);
+        $tasks = Task::where('sheet', '=', $sheet);
         if ($priority != 'any') {
             $tasks = $tasks->where('priority', '=', $priority);
         }
@@ -30,10 +30,11 @@ class TaskService {
         return $tasks;
     }
 
-    public function getPriorityCount() {
+    public function getPriorityCount($sheet) {
         $totalCountByPriority = DB::table('tasks')
                 ->select('priority', DB::raw('count(*) as totalTask'))
                 ->groupBy('priority')
+                ->where('sheet', '=', $sheet)
                 ->get()
                 ->toArray();
 

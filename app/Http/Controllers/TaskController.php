@@ -25,10 +25,10 @@ class TaskController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($priority='any') {
+    public function index($sheet, $priority='any') {
         /* @var $tasks \Illuminate\Database\Eloquent\Builder */
-        $tasks=$this->taskService->show($priority);
-        $totalCountByPriority= $this->taskService->getPriorityCount();
+        $tasks=$this->taskService->show($priority, $sheet);
+        $totalCountByPriority= $this->taskService->getPriorityCount($sheet);
         return view('tasks', ['tasks' => $tasks, 'totalByPriority' => $totalCountByPriority]);
     }
 

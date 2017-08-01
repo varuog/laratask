@@ -17,6 +17,9 @@ class CreateSheetsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('title');
+            $table->text('description');
+            $table->integer('user');
         });
     }
 

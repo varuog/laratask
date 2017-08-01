@@ -20,3 +20,6 @@ Route::any('/task/create', 'TaskController@create');
 Route::any('/task/show/{task}', 'TaskController@show');
 Route::any('/task/trash', 'TaskController@trash');
 Route::any('/task/delete', 'TaskController@destroy');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -53,31 +53,31 @@
                 <div class="box-body no-padding">
                     <ul class="nav nav-pills nav-stacked">
                         <li>
-                            <a href="{{action('TaskController@index', ['page'=>1, 'priority'=>'any'])}}">
+                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'any'])}}">
                                 <i class="fa fa-circle-o text-black"></i> Any
                                 <span class="label label-primary pull-right">{{$totalByPriority['all']}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{action('TaskController@index', ['page'=>1, 'priority'=>'urgent'])}}">
+                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'urgent'])}}">
                                 <i class="fa fa-circle-o text-red"></i> Urgent
                                 <span class="label label-primary pull-right">{{$totalByPriority['urgent']}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{action('TaskController@index', ['page'=>1, 'priority'=>'high'])}}">
+                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'high'])}}">
                                 <i class="fa fa-circle-o text-yellow"></i> High
                                 <span class="label label-primary pull-right">{{$totalByPriority['high']}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{action('TaskController@index', ['page'=>1, 'priority'=>'medium'])}}">
+                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'medium'])}}">
                                 <i class="fa fa-circle-o text-green"></i> Medium
                                 <span class="label label-primary pull-right">{{$totalByPriority['medium']}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{action('TaskController@index', ['page'=>1, 'priority'=>'low'])}}">
+                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'low'])}}">
                                 <i class="fa fa-circle-o text-light-blue"></i> Low
                                 <span class="label label-primary pull-right">{{$totalByPriority['low']}}</span>
                             </a>

@@ -2,34 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
+use App\Sheet;
 use Illuminate\Http\Request;
-use App\Service\TaskService;
 use App\Service\SheetService;
+use App\Service\TaskService;
 
-class TaskController extends Controller {
-
-    private $taskService;
+class SheetController extends Controller
+{
+    
     private $sheetService;
-
-    /**
-     * Authenticate each action
-     * @param TaskService $taskService
-     */
-    public function __construct(TaskService $taskService, SheetService $sheetService) {
-        $this->taskService = $taskService;
+    private $taskService;
+    
+    public function __construct(SheetService $sheetService, TaskService $taskService) {
         $this->sheetService = $sheetService;
+        $this->taskService =$taskService;
         //All Task controler action should be taken from authenticated user
         $this->middleware('auth');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($sheet, $priority='any') {
-        
+    public function index($sheet, $priority)
+    {
+       
     }
 
     /**
@@ -37,7 +35,8 @@ class TaskController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
@@ -47,27 +46,33 @@ class TaskController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task) {
-        //
+    public function show(Sheet $sheet, $priority)
+    {
+         $tasks=$this->sheetService->show($priority, $sheet->id);
+        $totalCountByPriority= $this->taskService->getPriorityCount($sheet->id);
+        $sheets= $this->sheetService->fetchAll();
+        return view('tasks', ['tasks' => $tasks, 'totalByPriority' => $totalCountByPriority, 'sheets' => $sheets]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task) {
+    public function edit(Sheet $sheet)
+    {
         //
     }
 
@@ -75,21 +80,22 @@ class TaskController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
+     * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task) {
+    public function update(Request $request, Sheet $sheet)
+    {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Task  $task
+     * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task) {
+    public function destroy(Sheet $sheet)
+    {
         //
     }
-
 }

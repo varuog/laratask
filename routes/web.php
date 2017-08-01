@@ -15,11 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('/tasks/{sheet}/{priority}/', 'TaskController@index');
 Route::any('/task/create', 'TaskController@create');
 Route::any('/task/show/{task}', 'TaskController@show');
 Route::any('/task/trash', 'TaskController@trash');
 Route::any('/task/delete', 'TaskController@destroy');
+
+/**
+ * Sheet
+ */
+Route::any('/sheet/{sheet}/{priority}/', 'SheetController@show');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

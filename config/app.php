@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         //Laratask specific provider
-        \App\Providers\TaskServicePorvider::class
+        \App\Providers\TaskServicePorvider::class,
+        \App\Providers\SheetServicePorvider::class
     ],
 
     /*

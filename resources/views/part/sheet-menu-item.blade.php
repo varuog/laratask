@@ -1,0 +1,1 @@
+  <li><a href="{{action('SheetController@show',['sheet' => $sheet->id, 'priority' => 'any'])}}"><i class="fa fa-circle-o"></i> {{$sheet->title}}</a></li>

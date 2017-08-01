@@ -124,10 +124,13 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                                <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Create new sheet</a></li>
                             </ul>
                         </li>
+                        <!-- Sheet menu list -->
+                        @each('part.sheet-menu-item', $sheets, 'sheet')
+                        <!-- /Sheet menu list -->
+
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -135,7 +138,7 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                 @yield('content')
+                @yield('content')
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
@@ -163,49 +166,49 @@
         <script src="/js/icheck.min.js"></script>
         <!-- Page Script -->
         <script>
-$(function () {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
-    });
+            $(function () {
+                //Enable iCheck plugin for checkboxes
+                //iCheck for checkbox and radio inputs
+                $('.mailbox-messages input[type="checkbox"]').iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue'
+                });
 
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function () {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-            //Uncheck all checkboxes
-            $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-        } else {
-            //Check all checkboxes
-            $(".mailbox-messages input[type='checkbox']").iCheck("check");
-            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-        }
-        $(this).data("clicks", !clicks);
-    });
+                //Enable check and uncheck all functionality
+                $(".checkbox-toggle").click(function () {
+                    var clicks = $(this).data('clicks');
+                    if (clicks) {
+                        //Uncheck all checkboxes
+                        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+                        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+                    } else {
+                        //Check all checkboxes
+                        $(".mailbox-messages input[type='checkbox']").iCheck("check");
+                        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+                    }
+                    $(this).data("clicks", !clicks);
+                });
 
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function (e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
+                //Handle starring for glyphicon and font awesome
+                $(".mailbox-star").click(function (e) {
+                    e.preventDefault();
+                    //detect type
+                    var $this = $(this).find("a > i");
+                    var glyph = $this.hasClass("glyphicon");
+                    var fa = $this.hasClass("fa");
 
-        //Switch states
-        if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-        }
+                    //Switch states
+                    if (glyph) {
+                        $this.toggleClass("glyphicon-star");
+                        $this.toggleClass("glyphicon-star-empty");
+                    }
 
-        if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-        }
-    });
-});
+                    if (fa) {
+                        $this.toggleClass("fa-star");
+                        $this.toggleClass("fa-star-o");
+                    }
+                });
+            });
         </script>
         <!-- AdminLTE for demo purposes -->
         <script src="/js/demo.js"></script>

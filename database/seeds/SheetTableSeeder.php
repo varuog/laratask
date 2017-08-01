@@ -18,7 +18,7 @@ class SheetTableSeeder extends Seeder {
                 'created_at' => $faker->dateTime,
                 'updated_at' => $faker->dateTime,
                 'deleted_at' => $faker->dateTime,
-                'title' => $faker->sentence,
+                'title' => $faker->sentence(2),
                 'description' => $faker->text,
                 'user' => rand(1,3),
             ]);

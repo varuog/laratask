@@ -10,8 +10,14 @@ class TaskController extends Controller {
 
     private $taskService;
 
+    /**
+     * Authenticate each action
+     * @param TaskService $taskService
+     */
     public function __construct(TaskService $taskService) {
         $this->taskService = $taskService;
+        //All Task controler action should be taken from authenticated user
+        $this->middleware('auth');
     }
 
     /**

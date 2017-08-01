@@ -14,9 +14,9 @@ class UserTableSeeder extends Seeder {
         DB::table('users')->insert([
                 'created_at' => $faker->dateTime,
                 'updated_at' => $faker->dateTime,
-                'deleted_at' => $faker->dateTime,
                 'name' => 'Gourav Sarkar',
                 'email' => 'gsarkar.dev@gmail.com',
+                'remember_token' => null,
                 'password' => Hash::make('gsarkar.dev')
             ]);
         
@@ -25,9 +25,9 @@ class UserTableSeeder extends Seeder {
             DB::table('users')->insert([
                 'created_at' => $faker->dateTime,
                 'updated_at' => $faker->dateTime,
-                'deleted_at' => $faker->dateTime,
                 'name' => $faker->name,
                 'email' => $faker->email,
+                'remember_token' => null,
                 'password' => Hash::make(explode('@', $email)[0])
             ]);
         }

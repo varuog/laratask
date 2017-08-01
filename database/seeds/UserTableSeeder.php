@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder {
                 'password' => Hash::make('gsarkar.dev')
             ]);
         
-        for ($i = 0; $i <= 2; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $email=$faker->email;
             DB::table('users')->insert([
                 'created_at' => $faker->dateTime,

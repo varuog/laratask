@@ -13,7 +13,7 @@ class TaskTableSeeder extends Seeder {
         $faker = Faker\Factory::create();
         $priority= ['urgent','high', 'medium', 'low'];
         
-        for ($i = 0; $i <= 300; $i++) {
+        for ($i = 1; $i <= 300; $i++) {
             DB::table('tasks')->insert([
                 'created_at' => $faker->dateTime,
                 'updated_at' => $faker->dateTime,

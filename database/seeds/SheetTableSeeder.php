@@ -13,7 +13,7 @@ class SheetTableSeeder extends Seeder {
         $faker = Faker\Factory::create();
        
         
-        for ($i = 0; $i <= 3; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             DB::table('sheets')->insert([
                 'created_at' => $faker->dateTime,
                 'updated_at' => $faker->dateTime,

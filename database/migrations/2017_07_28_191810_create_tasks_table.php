@@ -23,6 +23,11 @@ class CreateTasksTable extends Migration
             $table->dateTime('completetionDate')->nullable();
             $table->integer('sheet_id');
             $table->enum('priority', ['urgent','high', 'medium', 'low']);
+            
+            $table->index('sheet_id');
+            $table->index('priority');
+            $table->index('dueDate');
+            $table->index('completetionDate');
            
         });
     }

@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://laratask/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -179,7 +179,7 @@ return [
         
         //Laratask specific provider
         \App\Providers\TaskServicePorvider::class,
-        \App\Providers\SheetServicePorvider::class
+        \App\Providers\SheetServiceProvider::class
     ],
 
     /*

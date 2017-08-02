@@ -20,6 +20,9 @@ class CreateSheetsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('user_id');
+            
+            
+            $table->index('user_id');
         });
     }
 

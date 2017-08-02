@@ -1,7 +1,7 @@
 # laratask
 
 ## Description
-A sample application for task management
+A sample application for task management (WIP)
 
 ## Installation
 ```bash

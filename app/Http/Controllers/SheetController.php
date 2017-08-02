@@ -7,27 +7,25 @@ use Illuminate\Http\Request;
 use App\Service\SheetService;
 use App\Service\TaskService;
 
-class SheetController extends Controller
-{
-    
+class SheetController extends Controller {
+
     private $sheetService;
     private $taskService;
-    
+
     public function __construct(SheetService $sheetService, TaskService $taskService) {
         $this->sheetService = $sheetService;
-        $this->taskService =$taskService;
+        $this->taskService = $taskService;
         //All Task controler action should be taken from authenticated user
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($sheet, $priority)
-    {
-       
+    public function index($sheet, $priority) {
+        
     }
 
     /**
@@ -35,9 +33,9 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $sheets = $this->sheetService->fetchAll();
+        return view('sheet-create', ['sheets' => $sheets]);
     }
 
     /**
@@ -46,9 +44,11 @@ class SheetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $sheets = $this->sheetService->fetchAll();
+        $newsheet = $this->sheetService->create($request->all());
+
+        return view('sheet-create', ['sheets' => $sheets]);
     }
 
     /**
@@ -57,12 +57,15 @@ class SheetController extends Controller
      * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function show(Sheet $sheet, $priority)
-    {
-         $tasks=$this->sheetService->show($priority, $sheet->id);
-        $totalCountByPriority= $this->taskService->getPriorityCount($sheet->id);
-        $sheets= $this->sheetService->fetchAll();
-        return view('tasks', ['tasks' => $tasks, 'totalByPriority' => $totalCountByPriority, 'sheets' => $sheets]);
+    public function show(Sheet $sheet, $priority) {
+        $tasks = $this->sheetService->show($priority, $sheet->id);
+        $totalCountByPriority = $this->taskService->getPriorityCount($sheet->id);
+        $sheets = $this->sheetService->fetchAll();
+        return view('tasks', ['tasks' => $tasks
+            , 'totalByPriority' => $totalCountByPriority
+            , 'sheets' => $sheets
+            , 'priority' => $priority
+            , 'sheet' => $sheet->id]);
     }
 
     /**
@@ -71,8 +74,7 @@ class SheetController extends Controller
      * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sheet $sheet)
-    {
+    public function edit(Sheet $sheet) {
         //
     }
 
@@ -83,8 +85,7 @@ class SheetController extends Controller
      * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sheet $sheet)
-    {
+    public function update(Request $request, Sheet $sheet) {
         //
     }
 
@@ -94,8 +95,8 @@ class SheetController extends Controller
      * @param  \App\Sheet  $sheet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sheet $sheet)
-    {
+    public function destroy(Sheet $sheet) {
         //
     }
+
 }

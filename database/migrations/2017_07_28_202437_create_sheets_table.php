@@ -19,7 +19,7 @@ class CreateSheetsTable extends Migration
             $table->softDeletes();
             $table->string('title');
             $table->text('description');
-            $table->integer('user');
+            $table->integer('user_id');
         });
     }
 

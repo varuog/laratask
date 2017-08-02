@@ -23,7 +23,7 @@ class SheetServiceProvider extends ServiceProvider
      */
     public function register()
     {
-         $this->app->bind(\App\Service\TaskService::class,function($app){
+         $this->app->bind(\App\Service\SheetService::class,function($app){
             return new \App\Service\SheetService();
         });
     }

@@ -49,43 +49,6 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-
-                    <div class="navbar-custom-menu">
-                        <ul class="nav navbar-nav">     
-                            <!-- Tasks: style can be found in dropdown.less -->
-                            <li class="dropdown tasks-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-flag-o"></i>
-                                    <span class="label label-danger">9</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have 9 tasks</li>
-                                    <li>
-                                        <!-- inner menu: contains the actual data -->
-                                        <ul class="menu">
-                                            <li><!-- Task item -->
-                                                <a href="#">
-                                                    <h3>
-                                                        Design some buttons
-                                                        <small class="pull-right">20%</small>
-                                                    </h3>
-                                                    <div class="progress xs">
-                                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">20% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <!-- end task item -->
-                                        </ul>
-                                    </li>
-                                    <li class="footer">
-                                        <a href="#">View all tasks</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
@@ -95,41 +58,56 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
+                            <!-- <img src="https://www.gravatar.com/avatar/{{md5( strtolower( trim( Auth::user()->email ) ) )}}" class="img-circle" alt="User Image"> -->
                             <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>Alexander Pierce</p>
+                            <p>{{Auth::user()->email}}</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
-                    <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
+                        <li>
+                            <a href="{{route('dashboard')}}">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+
+                        </li>
+
+                        <li class="header">SHEETS</li>
+                        <li>
+                            <a href="{{action('SheetController@create')}}">
+                                <i class="fa fa-plus"></i> <span>Add Sheet</span>
+                            </a>
+
+                        </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                                <i class="fa fa-book"></i>
+                                <span>All Sheets</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
+
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Create new sheet</a></li>
+                                <!-- Sheet menu list -->
+                                @each('part.sheet-menu-item', $sheets, 'sheet', 'part.task-empty')
+                                <!-- /Sheet menu list -->
                             </ul>
+
+
+
+                        <li class="header">LABELS</li>
+                        <li>
+                            <a href="{{action('HomeController@index')}}">
+                                <i class="fa fa-sign-out"></i> <span>Logout</span>
+                            </a>
+
                         </li>
-                        <!-- Sheet menu list -->
-                        @each('part.sheet-menu-item', $sheets, 'sheet')
-                        <!-- /Sheet menu list -->
 
                     </ul>
                 </section>
@@ -166,49 +144,49 @@
         <script src="/js/icheck.min.js"></script>
         <!-- Page Script -->
         <script>
-            $(function () {
-                //Enable iCheck plugin for checkboxes
-                //iCheck for checkbox and radio inputs
-                $('.mailbox-messages input[type="checkbox"]').iCheck({
-                    checkboxClass: 'icheckbox_flat-blue',
-                    radioClass: 'iradio_flat-blue'
-                });
+$(function () {
+    //Enable iCheck plugin for checkboxes
+    //iCheck for checkbox and radio inputs
+    $('.mailbox-messages input[type="checkbox"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+    });
 
-                //Enable check and uncheck all functionality
-                $(".checkbox-toggle").click(function () {
-                    var clicks = $(this).data('clicks');
-                    if (clicks) {
-                        //Uncheck all checkboxes
-                        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-                        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-                    } else {
-                        //Check all checkboxes
-                        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-                        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-                    }
-                    $(this).data("clicks", !clicks);
-                });
+    //Enable check and uncheck all functionality
+    $(".checkbox-toggle").click(function () {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+            //Uncheck all checkboxes
+            $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+            //Check all checkboxes
+            $(".mailbox-messages input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+    });
 
-                //Handle starring for glyphicon and font awesome
-                $(".mailbox-star").click(function (e) {
-                    e.preventDefault();
-                    //detect type
-                    var $this = $(this).find("a > i");
-                    var glyph = $this.hasClass("glyphicon");
-                    var fa = $this.hasClass("fa");
+    //Handle starring for glyphicon and font awesome
+    $(".mailbox-star").click(function (e) {
+        e.preventDefault();
+        //detect type
+        var $this = $(this).find("a > i");
+        var glyph = $this.hasClass("glyphicon");
+        var fa = $this.hasClass("fa");
 
-                    //Switch states
-                    if (glyph) {
-                        $this.toggleClass("glyphicon-star");
-                        $this.toggleClass("glyphicon-star-empty");
-                    }
+        //Switch states
+        if (glyph) {
+            $this.toggleClass("glyphicon-star");
+            $this.toggleClass("glyphicon-star-empty");
+        }
 
-                    if (fa) {
-                        $this.toggleClass("fa-star");
-                        $this.toggleClass("fa-star-o");
-                    }
-                });
-            });
+        if (fa) {
+            $this.toggleClass("fa-star");
+            $this.toggleClass("fa-star-o");
+        }
+    });
+});
         </script>
         <!-- AdminLTE for demo purposes -->
         <script src="/js/demo.js"></script>

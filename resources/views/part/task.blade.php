@@ -3,7 +3,7 @@
     <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
     <!-- <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td> -->
     <td class="mailbox-subject"> 
-        <a href="{{action('TaskController@show',['task' => $task->id])}}">{{$task->title}}</a>
+       <a href="{{action('TaskController@show',['task' => $task->id])}}">{{$task->title}}</a>
     </td>
     <td class="mailbox-subject"> <span class="label label-{{$task->priorityClass}}">{{ ucfirst($task->priority)}}</span></td>
     <td class="mailbox-subject"> {{$task->dueDate}}</td>

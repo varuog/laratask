@@ -1,4 +1,4 @@
-@extends('layout.laratask')
+@extends('layouts.laratask')
 <!-- Content Header (Page header) -->
 @section('content')
 <section class="content-header">
@@ -16,11 +16,11 @@
 <section class="content">
     <div class="row">
         <div class="col-md-3">
-            <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
+            <a href="{{action('TaskController@create', ['sheet' => $sheet])}}" class="btn btn-primary btn-block margin-bottom">Add Task</a>
 
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Folders</h3>
+                    <h3 class="box-title">Actions</h3>
 
                     <div class="box-tools">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -29,13 +29,7 @@
                 </div>
                 <div class="box-body no-padding">
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
-                                <span class="label label-primary pull-right">12</span></a></li>
-                        <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                        <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                        <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                        <li><a href="#"><i class="fa fa-trash-o"></i> Trash <span class="label label-warning pull-right">65</span></a></li>
                     </ul>
                 </div>
                 <!-- /.box-body -->
@@ -52,32 +46,32 @@
                 </div>
                 <div class="box-body no-padding">
                     <ul class="nav nav-pills nav-stacked">
-                        <li>
-                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'any'])}}">
-                                <i class="fa fa-circle-o text-black"></i> Any
+                        <li @if($priority=='any') class="active" @endif>
+                             <a href="{{action('SheetController@show', ['sheet'=> $sheet, 'priority'=>'any'])}}">
+                                <i class="fa fa-circle-o text-black"></i> Any {{request('priority')}}
                                 <span class="label label-primary pull-right">{{$totalByPriority['all']}}</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'urgent'])}}">
+                        <li @if($priority=='urgent') class="active" @endif>
+                             <a href="{{action('SheetController@show', ['sheet'=>$sheet, 'priority'=>'urgent'])}}">
                                 <i class="fa fa-circle-o text-red"></i> Urgent
                                 <span class="label label-primary pull-right">{{$totalByPriority['urgent']}}</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'high'])}}">
+                        <li @if($priority=='high') class="active" @endif>
+                             <a href="{{action('SheetController@show', ['sheet'=>$sheet, 'priority'=>'high'])}}">
                                 <i class="fa fa-circle-o text-yellow"></i> High
                                 <span class="label label-primary pull-right">{{$totalByPriority['high']}}</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'medium'])}}">
+                        <li @if($priority=='medium') class="active" @endif>
+                             <a href="{{action('SheetController@show', ['sheet'=>$sheet, 'priority'=>'medium'])}}">
                                 <i class="fa fa-circle-o text-green"></i> Medium
                                 <span class="label label-primary pull-right">{{$totalByPriority['medium']}}</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{action('SheetController@show', ['sheet'=>1, 'priority'=>'low'])}}">
+                        <li @if($priority=='low') class="active" @endif>
+                             <a href="{{action('SheetController@show', ['sheet'=>$sheet, 'priority'=>'low'])}}">
                                 <i class="fa fa-circle-o text-light-blue"></i> Low
                                 <span class="label label-primary pull-right">{{$totalByPriority['low']}}</span>
                             </a>
@@ -94,12 +88,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Inbox</h3>
 
-                    <div class="box-tools pull-right">
-                        <div class="has-feedback">
-                            <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                        </div>
-                    </div>
                     <!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->

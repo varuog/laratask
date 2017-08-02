@@ -20,28 +20,45 @@ class TaskService {
 
     const ITEM_PER_PAGE = 15;
 
-    public function show($priority, $sheet) {
+    public function show($priority) {
 
-        $tasks = Task::where('sheet', '=', $sheet);
         if ($priority != 'any') {
-            $tasks = $tasks->where('priority', '=', $priority);
+            $tasks = Task::where('priority', '=', $priority);
+        } else {
+            $tasks = Task::all();
         }
+
         $tasks = $tasks->paginate(static::ITEM_PER_PAGE);
         return $tasks;
     }
 
     public function getPriorityCount($sheet) {
+        $defaultTotalCount = ['urgent' => 0, 'high' => 0, 'medium' => 0, 'low' => 0, 'all' => 0];
         $totalCountByPriority = DB::table('tasks')
-                ->select('priority', DB::raw('count(*) as totalTask'))
+                ->select('priority', DB::raw('COUNT(*) as totalTask'))
+                ->where('sheet_id', '=', $sheet)
                 ->groupBy('priority')
-                ->where('sheet', '=', $sheet)
                 ->get()
                 ->toArray();
 
 
-       $totalCountByPriority=array_column($totalCountByPriority, 'totalTask', 'priority');
-       $totalCountByPriority['all']= array_sum($totalCountByPriority);
-       return $totalCountByPriority;
+        if (!empty($totalCountByPriority)) {
+            $totalCountByPriority = array_column($totalCountByPriority, 'totalTask', 'priority');
+            if (!empty($totalCountByPriority)) {
+                $totalCountByPriority['all'] = array_sum($totalCountByPriority);
+                return array_merge($defaultTotalCount, $totalCountByPriority);
+            }
+        }
+        return $defaultTotalCount;
+    }
+
+    public function create($sheet, array $taskData) {
+        if (!empty($taskData['completionDate'])) {
+            $taskData['completionDate'] = \Carbon\Carbon::now();
+        }
+        return \App\Sheet::find($sheet)
+                        ->tasks()
+                        ->create($taskData);
     }
 
 }

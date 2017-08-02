@@ -28,7 +28,7 @@ class TaskController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($sheet, $priority='any') {
+    public function index($sheet, $priority = 'any') {
         
     }
 
@@ -37,8 +37,11 @@ class TaskController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //
+    public function create($sheet) {
+
+        $sheets = $this->sheetService->fetchAll();
+        $priorityOptions = ['urgent', 'high', 'medium', 'low'];
+        return view('task-create', ['sheets' => $sheets, 'priorityOptions' => $priorityOptions, 'sheet'=>$sheet]);
     }
 
     /**
@@ -47,8 +50,11 @@ class TaskController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request, $sheet) {
+        $sheets = $this->sheetService->fetchAll();
+        $priorityOptions = ['urgent', 'high', 'medium', 'low'];
+        $this->taskService->create($sheet, $request->all());
+        return view('task-create', ['sheets' => $sheets, 'priorityOptions' => $priorityOptions, 'sheet'=>$sheet]);
     }
 
     /**

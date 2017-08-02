@@ -1,1 +1,1 @@
-  <li><a href="{{action('SheetController@show',['sheet' => $sheet->id, 'priority' => 'any'])}}"><i class="fa fa-circle-o"></i> {{$sheet->title}}</a></li>
+  <li><a href="{{action('SheetController@show',['sheet' => $sheet->id, 'priority' => 'any'])}}"><i class="fa fa-circle-o"></i> {{ucfirst($sheet->title)}}</a></li>

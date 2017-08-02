@@ -18,10 +18,10 @@ class CreateTasksTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->dateTime('dueDate');
-            $table->dateTime('completetionDate');
-            $table->integer('sheet');
+            $table->dateTime('completetionDate')->nullable();
+            $table->integer('sheet_id');
             $table->enum('priority', ['urgent','high', 'medium', 'low']);
            
         });
